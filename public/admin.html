@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel Admin</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<h1>Panel Administrador</h1>
+<button id="logout">Cerrar Sesión</button>
+
+<h2>Agregar / Editar Producto</h2>
+<form id="formProducto">
+  <input type="hidden" name="id" id="productoId"> <!-- id del producto a editar -->
+  <input type="text" name="nombre" placeholder="Nombre" required>
+  <select name="categoria">
+    <option value="Chorizo">Chorizo</option>
+    <option value="Longaniza">Longaniza</option>
+    <option value="Salchicha">Salchicha</option>
+  </select>
+  <input type="text" name="descripcion" placeholder="Descripción">
+  <input type="number" step="0.01" name="precio" placeholder="Precio" required>
+  <input type="text" name="imagen" placeholder="URL de la imagen">
+  <button type="submit">Guardar</button>
+</form>
+
+
+
+<h2>Lista de Productos</h2>
+<div id="listaProductos"></div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

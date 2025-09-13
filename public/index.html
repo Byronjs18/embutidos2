@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Embutidos La Delicia</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="d-flex justify-content-between align-items-center p-3 bg-dark text-white">
+    <div class="d-flex align-items-center">
+      <img src="assets/img/Logo.jpeg" alt="Logo" width="50" height="50" class="me-2 rounded">
+      <h1 class="h4 m-0">Embutidos La Delicia</h1>
+    </div>
+
+    <nav>
+      <button class="btn btn-outline-light me-2" onclick="mostrarSeccion('tienda')">Tienda</button>
+      <button class="btn btn-outline-light me-2" onclick="mostrarSeccion('quienes')">Quiénes somos</button>
+      <button class="btn btn-outline-light" onclick="mostrarSeccion('contacto')">Contacto</button>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container my-4">
+
+    <!-- Sección Tienda -->
+    <section id="tienda" class="seccion">
+      <h2 class="text-center mb-4" style="color: white;">Catálogo de Productos</h2>
+
+      <!-- Catálogo -->
+      <div class="row" id="productos">
+        <!-- Aquí se insertarán los productos con JS -->
+      </div>
+
+      <!-- Carrito -->
+      <h2 class="mt-5", style="color: white;">Mi Carrito (<span id="contadorCarrito">0</span>)</h2>
+      <div id="carrito" class="mb-3"></div>
+      <button id="enviarWhatsapp" class="btn btn-success">Enviar por WhatsApp</button>
+    </section>
+
+    <!-- Sección Quiénes somos -->
+    <section id="quienes" class="seccion d-none">
+      <h2 class="text-center mb-4", style="color: white;">Quiénes Somos</h2>
+      <p>
+        En un pequeño pueblo rodeado de montañas, existía una tienda llamada "La Delicia de los Embutidos", famosa por su aroma irresistible que se percibía desde la calle principal. El dueño, Don Ernesto, había heredado las recetas secretas de su abuelo, quien había aprendido el arte de curar carnes en España. Cada mañana, al abrir las puertas de madera, los estantes se llenaban con chorizos ahumados, longanizas jugosas y salchichones colgados en hileras perfectas. La gente del pueblo sabía que no se trataba solo de comprar comida, sino de llevarse un pedazo de tradición en cada bocado.
+
+        Con el tiempo, la tienda se convirtió en un punto de encuentro. Los clientes no solo llegaban a probar los nuevos sabores, sino también a compartir historias alrededor de la mesa donde Don Ernesto ofrecía degustaciones gratuitas. Entre risas y conversaciones, la tienda empezó a ser reconocida más allá del pueblo, atrayendo viajeros curiosos que querían probar “el mejor chorizo del valle”. Así, La Delicia de los Embutidos se convirtió en un símbolo de identidad y unión, donde cada producto llevaba consigo el cariño y la dedicación de varias generaciones.
+      </p>
+      <div class="text-center">
+        <img src="assets/img/QuienesSomos.jpeg" alt="Nuestro equipo" class="img-fluid rounded shadow">
+      </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="seccion d-none">
+      <h2 class="text-center mb-4">Contáctanos</h2>
+
+      <div class="row">
+        <!-- Formulario -->
+        <div class="col-md-6">
+          <form>
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Nombre" required>
+            </div>
+            <div class="mb-3">
+              <input type="email" class="form-control" placeholder="Correo electrónico" required>
+            </div>
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Asunto" required>
+            </div>
+            <div class="mb-3">
+              <textarea class="form-control" rows="4" placeholder="Mensaje" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-danger w-100">Enviar</button>
+          </form>
+        </div>
+
+        <!-- Mapa -->
+        <div class="col-md-6">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387190.27988527575!2d-74.25987568703241!3d40.6976700641439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDI1JzUwLjAiTiA3NMKwMTUnMDAuMCJX!5e0!3m2!1ses!2s!4v1699999999999"
+            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-white text-center p-3">
+    <p class="mb-2">Síguenos en redes sociales</p>
+    <div style="font-size: 24px;">
+      <a href="#" class="text-white me-3"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="text-white me-3"><i class="fab fa-x-twitter"></i></a>
+      <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </footer>
+
+  <script src="js/carrito.js"></script>
+  <script>
+    function mostrarSeccion(id) {
+      document.querySelectorAll('.seccion').forEach(sec => sec.classList.add('d-none'));
+      document.getElementById(id).classList.remove('d-none');
+    }
+  </script>
+
+</body>
+</html>
