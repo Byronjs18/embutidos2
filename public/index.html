@@ -1,113 +1,207 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Embutidos La Delicia</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <title>Embutidos La Delicia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-  <!-- HEADER -->
-  <header class="d-flex justify-content-between align-items-center p-3 bg-dark text-white">
-    <div class="d-flex align-items-center">
-      <img src="assets/img/Logo.jpeg" alt="Logo" width="50" height="50" class="me-2 rounded">
-      <h1 class="h4 m-0">Embutidos La Delicia</h1>
-    </div>
-
-    <nav>
-      <button class="btn btn-outline-light me-2" onclick="mostrarSeccion('tienda')">Tienda</button>
-      <button class="btn btn-outline-light me-2" onclick="mostrarSeccion('quienes')">Quiénes somos</button>
-      <button class="btn btn-outline-light" onclick="mostrarSeccion('contacto')">Contacto</button>
-    </nav>
-  </header>
-
-  <!-- MAIN -->
-  <main class="container my-4">
-
-    <!-- Sección Tienda -->
-    <section id="tienda" class="seccion">
-      <h2 class="text-center mb-4" style="color: white;">Catálogo de Productos</h2>
-
-      <!-- Catálogo -->
-      <div class="row" id="productos">
-        <!-- Aquí se insertarán los productos con JS -->
-      </div>
-
-      <!-- Carrito -->
-      <h2 class="mt-5", style="color: white;">Mi Carrito (<span id="contadorCarrito">0</span>)</h2>
-      <div id="carrito" class="mb-3"></div>
-      <button id="enviarWhatsapp" class="btn btn-success">Enviar por WhatsApp</button>
-    </section>
-
-    <!-- Sección Quiénes somos -->
-    <section id="quienes" class="seccion d-none">
-      <h2 class="text-center mb-4", style="color: white;">Quiénes Somos</h2>
-      <p>
-        En un pequeño pueblo rodeado de montañas, existía una tienda llamada "La Delicia de los Embutidos", famosa por su aroma irresistible que se percibía desde la calle principal. El dueño, Don Ernesto, había heredado las recetas secretas de su abuelo, quien había aprendido el arte de curar carnes en España. Cada mañana, al abrir las puertas de madera, los estantes se llenaban con chorizos ahumados, longanizas jugosas y salchichones colgados en hileras perfectas. La gente del pueblo sabía que no se trataba solo de comprar comida, sino de llevarse un pedazo de tradición en cada bocado.
-
-        Con el tiempo, la tienda se convirtió en un punto de encuentro. Los clientes no solo llegaban a probar los nuevos sabores, sino también a compartir historias alrededor de la mesa donde Don Ernesto ofrecía degustaciones gratuitas. Entre risas y conversaciones, la tienda empezó a ser reconocida más allá del pueblo, atrayendo viajeros curiosos que querían probar “el mejor chorizo del valle”. Así, La Delicia de los Embutidos se convirtió en un símbolo de identidad y unión, donde cada producto llevaba consigo el cariño y la dedicación de varias generaciones.
-      </p>
-      <div class="text-center">
-        <img src="assets/img/QuienesSomos.jpeg" alt="Nuestro equipo" class="img-fluid rounded shadow">
-      </div>
-    </section>
-
-    <!-- Sección Contacto -->
-    <section id="contacto" class="seccion d-none">
-      <h2 class="text-center mb-4">Contáctanos</h2>
-
-      <div class="row">
-        <!-- Formulario -->
-        <div class="col-md-6">
-          <form>
-            <div class="mb-3">
-              <input type="text" class="form-control" placeholder="Nombre" required>
-            </div>
-            <div class="mb-3">
-              <input type="email" class="form-control" placeholder="Correo electrónico" required>
-            </div>
-            <div class="mb-3">
-              <input type="text" class="form-control" placeholder="Asunto" required>
-            </div>
-            <div class="mb-3">
-              <textarea class="form-control" rows="4" placeholder="Mensaje" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-danger w-100">Enviar</button>
-          </form>
+    <!-- HEADER -->
+    <header class="d-flex justify-content-between align-items-center p-3 bg-dark text-white">
+        <div class="d-flex align-items-center">
+            <img src="assets/img/Logo.jpeg" alt="Logo" width="50" height="50" class="me-2 rounded">
+            <h1 class="h4 m-0">Embutidos La Delicia</h1>
+        </div>
+        <div class="position-relative">
+            <!-- Botón del carrito -->
+            <button class="btn btn-outline-primary" id="carrito-btn" data-bs-toggle="modal"
+                data-bs-target="#carritoModal">
+                🛒 <span id="carrito-count" class="badge bg-danger">0</span>
+            </button>
         </div>
 
-        <!-- Mapa -->
-        <div class="col-md-6">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387190.27988527575!2d-74.25987568703241!3d40.6976700641439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDI1JzUwLjAiTiA3NMKwMTUnMDAuMCJX!5e0!3m2!1ses!2s!4v1699999999999"
-            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
-          </iframe>
+        <nav>
+            <button class="btn btn-outline-light me-2" onclick="mostrarSeccion('tienda')">Tienda</button>
+            <button class="btn btn-outline-light me-2" onclick="mostrarSeccion('quienes')">Quiénes somos</button>
+            <button class="btn btn-outline-light" onclick="mostrarSeccion('contacto')">Contacto</button>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="container my-4">
+
+        <!-- Sección Tienda -->
+        <section id="tienda" class="seccion">
+            <h2 class="text-center mb-4" style="color: white;">Catálogo de Productos</h2>
+
+            <!-- Catálogo -->
+            <div class="row g-4 justify-content-center" id="productos"></div>
+
+            <!-- Aquí se insertarán los productos con JS -->
+            </div>
+
+            <!-- Botón flotante de WhatsApp -->
+            <a href="https://wa.me/50242775644?text=Hola%20quisiera%20informacion%20sobre%20los%20embutidos"
+                class="whatsapp-float" target="_blank" id="whatsappButton">
+                💬
+            </a>
+        </section>
+
+        <!-- Sección Quiénes somos -->
+        <section id="quienes" class="seccion d-none">
+            <h2 class="text-center mb-4" style="color: white;">Quiénes Somos</h2>
+            <h2>Quiénes Somos</h2>
+            <p>
+                En un pequeño pueblo rodeado de montañas, existía una tienda llamada "La Delicia de los Embutidos",
+                famosa por su aroma irresistible que se percibía desde la calle principal. El dueño, Don Ernesto, había
+                heredado las recetas secretas de su abuelo, quien había aprendido el arte de curar carnes en España.
+                Cada mañana, al abrir las puertas de madera, los estantes se llenaban con chorizos ahumados, longanizas
+                jugosas y salchichones colgados en hileras perfectas. La gente del pueblo sabía que no se trataba solo
+                de comprar comida, sino de llevarse un pedazo de tradición en cada bocado.
+
+                Con el tiempo, la tienda se convirtió en un punto de encuentro. Los clientes no solo llegaban a probar
+                los nuevos sabores, sino también a compartir historias alrededor de la mesa donde Don Ernesto ofrecía
+                degustaciones gratuitas. Entre risas y conversaciones, la tienda empezó a ser reconocida más allá del
+                pueblo, atrayendo viajeros curiosos que querían probar “el mejor chorizo del valle”. Así, La Delicia de
+                los Embutidos se convirtió en un símbolo de identidad y unión, donde cada producto llevaba consigo el
+                cariño y la dedicación de varias generaciones.
+            </p>
+            <div class="text-center">
+                <img src="assets/img/QuienesSomos.jpeg" alt="Nuestro equipo" class="img-fluid rounded shadow">
+            </div>
+        </section>
+
+        <!-- Sección Contacto -->
+        <section id="contacto" class="seccion d-none">
+            <h2 class="text-center mb-4">Contáctanos</h2>
+            <div class="row">
+                <h2 class="contact-title">Contáctanos</h2>
+                <p class="contact-subtitle">¿Tienes alguna duda o quieres colaborar con nosotros? Escríbenos o
+                    visítanos.</p>
+
+                <div class="contact-container">
+                    <!-- 🗺️ MAPA -->
+                    <div class="contact-map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.9594861983173!2d-90.73420782598462!3d14.55831777963678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x858935e913a6a8f3%3A0x238e8e7e632f8d8b!2sAntigua%20Guatemala!5e0!3m2!1ses!2sgt!4v1697032100000!5m2!1ses!2sgt"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                        </iframe>
+                    </div>
+
+                    <!-- 💬 FORMULARIO -->
+                    <form class="contact-form">
+                        <h3>Envíanos un mensaje</h3>
+
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="correo">Correo electrónico</label>
+                            <input type="email" id="correo" name="correo" placeholder="Tu correo" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje..."
+                                required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-enviar">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center p-3">
+        <p class="mb-2">Síguenos en redes sociales</p>
+        <div style="font-size: 24px;">
+            <a href="#" class="text-white me-3"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-white me-3"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
         </div>
-      </div>
-    </section>
+    </footer>
 
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="bg-dark text-white text-center p-3">
-    <p class="mb-2">Síguenos en redes sociales</p>
-    <div style="font-size: 24px;">
-      <a href="#" class="text-white me-3"><i class="fab fa-facebook"></i></a>
-      <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
-      <a href="#" class="text-white me-3"><i class="fab fa-x-twitter"></i></a>
-      <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+    <!-- MODAL DEL CARRITO -->
+    <div class="modal fade" id="carritoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Mi Carrito</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="carrito-items"></tbody>
+                    </table>
+                    <div class="d-flex justify-content-between">
+                        <strong>Total: Q<span id="carrito-total">0</span></strong>
+                        <button id="btn-pagar" class="btn btn-success">Pagar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </footer>
+    <!-- Modal Confirmar Pedido -->
+    <div class="modal fade" id="confirmarPedidoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Total a pagar:</strong> Q<span id="totalPedido">0.00</span></p>
+                    <p><strong>Depósito en:</strong></p>
+                    <ul>
+                        <li>BANRURAL: 3100089 - Byron Jutzutz - Ahorro</li>
+                        <li>BI: 49386463 - Byron Jutzutz - Monetaria</li>
+                    </ul>
+                    <div class="mb-3">
+                        <label for="numTransaccion" class="form-label">Número de transacción:</label>
+                        <input type="text" class="form-control" id="numTransaccion" placeholder="Ej: 1234567890">
+                    </div>
 
-  <script src="js/carrito.js"></script>
-  <script>
-    function mostrarSeccion(id) {
-      document.querySelectorAll('.seccion').forEach(sec => sec.classList.add('d-none'));
-      document.getElementById(id).classList.remove('d-none');
-    }
-  </script>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" id="finalizarPedidoBtn">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="js/departamentos.js"></script>
+    <script src="js/carrito.js"></script>
+    <script>
+        function mostrarSeccion(id) {
+            document.querySelectorAll('.seccion').forEach(sec => sec.classList.add('d-none'));
+            document.getElementById(id).classList.remove('d-none');
+        }
+    </script>
 
 </body>
+
 </html>

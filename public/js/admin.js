@@ -2,7 +2,9 @@
 async function cargarProductos() {
     try {
         const res = await fetch('/productos');
-        const productos = await res.json();
+        const data = await res.json();
+        const productos = Array.isArray(data) ? data : data.rows || [];
+
         const cont = document.getElementById('listaProductos');
 
         cont.innerHTML = productos.map(p => `
@@ -14,7 +16,8 @@ async function cargarProductos() {
             <button onclick="eliminar(${p.id})">Eliminar</button>
             </div>
         </div>
-        `).join('');
+`).join('');
+
 
     } catch (err) {
         console.error(err);
@@ -99,6 +102,46 @@ document.getElementById('logout').addEventListener('click', () => {
     document.cookie = "admin=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.href = '/login';
 });
+async function cargarPedidos() {
+  try {
+    const res = await fetch('/admin/pedidos');
+    const pedidos = await res.json();
 
+    const tbody = document.querySelector('#tablaPedidos tbody');
+    tbody.innerHTML = pedidos.map(p => `
+      <tr>
+        <td>${p.id}</td>
+        <td>${p.nombre_cliente}</td>
+        <td>${p.productos}</td>
+        <td>Q${Number(p.total).toFixed(2)}</td>
+        <td>${p.estado}</td>
+        <td>
+          <button class="btn-estado btn-pendiente" onclick="cambiarEstado(${p.id}, 'pendiente')">Pendiente</button>
+          <button class="btn-estado btn-entregado" onclick="cambiarEstado(${p.id}, 'entregado')">Entregado</button>
+        </td>
+      </tr>
+    `).join('');
+
+  } catch (err) {
+    console.error('Error al cargar pedidos:', err);
+  }
+}
+
+
+async function cambiarEstado(id, estado) {
+  try {
+    const res = await fetch(`/admin/pedidos/${id}/estado`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ estado })
+    });
+    const data = await res.json();
+    alert(data.mensaje);
+    cargarPedidos(); // recargar tabla
+  } catch (err) {
+    console.error('Error al cambiar estado:', err);
+  }
+}
 // Inicializar lista
+cargarPedidos();
 cargarProductos();

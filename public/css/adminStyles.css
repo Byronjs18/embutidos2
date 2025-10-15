@@ -1,0 +1,224 @@
+/* ===================== ADMIN PANEL ===================== */
+body {
+  background-image: url('https://buenazo.cronosmedia.glr.pe/original/2023/01/03/63b46e1847deb8340e430774.jpg');
+  background-attachment: fixed; /* 🔥 Hace que la imagen quede estática */
+  background-size: cover;       /* La imagen cubre toda la pantalla */
+  background-position: center;  /* Centrada */
+  background-repeat: no-repeat; /* Evita repeticiones */
+  backdrop-filter: blur(5px);
+  
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2 {
+    color: white;
+}
+/* ===== FORMULARIO DE PRODUCTO (ADMIN) ===== */
+#formProducto {
+  background-color: rgba(43, 43, 43, 0.95);
+  padding: 20px 25px;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+#formProducto input,
+#formProducto select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+#formProducto input:focus,
+#formProducto select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0,123,255,0.4);
+}
+
+#formProducto button {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#formProducto button:hover {
+  background-color: #218838;
+  transform: scale(1.02);
+}
+
+/* Etiquetas alineadas */
+#formProducto label {
+  margin-bottom: 5px;
+  font-weight: 500;
+  display: block;
+}
+
+/* Título del formulario */
+#formProducto h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  #formProducto {
+    padding: 15px;
+  }
+}
+
+/* TABLA DE PEDIDOS */
+#tablaPedidos {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(43, 43, 43, 0.9);
+    color: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#tablaPedidos th,
+#tablaPedidos td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+#tablaPedidos thead {
+    background: linear-gradient(135deg, #6610f2, #007bff);
+    font-weight: 600;
+}
+
+#tablaPedidos tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* BOTONES DE ESTADO */
+.btn-estado {
+    padding: 5px 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: 0.3s;
+}
+
+.btn-pendiente {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-pendiente:hover {
+    background: #b02a37;
+}
+
+.btn-entregado {
+    background: #28a745;
+    color: white;
+}
+
+.btn-entregado:hover {
+    background: #218838;
+}
+
+/* RESPONSIVE */
+@media(max-width:576px) {
+    form#formProducto {
+        padding: 15px;
+    }
+
+    #tablaPedidos th,
+    #tablaPedidos td {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+}
+
+
+
+/* Cada card de producto admin */
+#listaProductos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.product-card-admin {
+    background-color: rgba(43, 43, 43, 0.95);
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card-admin:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.product-card-admin img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product-card-admin span {
+    color: white;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.product-card-admin button {
+    margin-top: 5px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.product-card-admin button:first-child {
+    background-color: #007bff;
+}
+
+.product-card-admin button:first-child:hover {
+    background-color: #6610f2;
+}
+
+.product-card-admin button:last-child {
+    background-color: #dc3545;
+}
+
+.product-card-admin button:last-child:hover {
+    background-color: #b02a37;
+}

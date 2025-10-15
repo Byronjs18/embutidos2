@@ -1,9 +1,12 @@
 require('dotenv').config();
+const pedidosRoutes = require('./routes/pedidos');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const session = require('express-session');
+
 
 const app = express();
 
@@ -13,6 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json()); // Para poder leer req.body en formato JSON
+app.use('/api/pedidos', pedidosRoutes);
+
 
 // Configuración de sesión
 app.use(session({
@@ -25,9 +30,11 @@ app.use(session({
 // Rutas y controladores
 const adminRoutes = require('./routes/admin'); 
 const productosRoutes = require('./routes/productos'); 
+const adminPedidosRoutes = require('./routes/adminPedidos');
 const { verificarAdmin } = require('./utils/auth'); // Middleware de protección
 
 app.use('/admin', adminRoutes);
+app.use('/admin', verificarAdmin, adminPedidosRoutes);
 app.use('/productos', productosRoutes);
 
 // Middleware para proteger panel

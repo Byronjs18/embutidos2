@@ -1,40 +1,34 @@
-const bcrypt = require('bcryptjs');
-const adminModel = require('../models/adminModel');
+const pool = require('../models/db');
+const bcrypt = require('bcrypt');
 
-module.exports = {
-  crearAdmin: async (req, res) => {
-    try {
-      const { nombre, correo, contrasena } = req.body;
-      const hash = bcrypt.hashSync(contrasena, 10);
-
-      adminModel.crear({ nombre, correo, contrasena: hash }, (err, result) => {
-        if (err) return res.status(500).json(err);
-        res.json({ mensaje: "Administrador creado", id: result.insertId });
-      });
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
-
-  loginAdmin: (req, res) => {
+exports.login  = async (req, res) => {
   const { correo, contrasena } = req.body;
 
-  adminModel.obtenerPorCorreo(correo, (err, admins) => {
-    if (err) return res.status(500).json({ mensaje: "Error en la base de datos" });
-    if (admins.length === 0) return res.status(401).json({ mensaje: "Usuario no encontrado" });
+  if (!correo || !contrasena) {
+    return res.status(400).json({ mensaje: 'Correo y contraseña son requeridos' });
+  }
 
-    const admin = admins[0];
-    if (!bcrypt.compareSync(contrasena, admin.contrasena)) {
-      return res.status(401).json({ mensaje: "Contraseña incorrecta" });
+  try {
+    const result = await pool.query('SELECT * FROM admins WHERE correo = $1', [correo]);
+
+    if (result.rowCount === 0) {
+      return res.status(401).json({ mensaje: 'Usuario no encontrado' });
     }
 
-    // Guardar ID del admin en la sesión
+    const admin = result.rows[0];
+
+    // Compara la contraseña con el hash
+    const match = await bcrypt.compare(contrasena, admin.contrasena);
+    if (!match) {
+      return res.status(401).json({ mensaje: 'Contraseña incorrecta' });
+    }
+
+    // Guardar sesión
     req.session.adminId = admin.id;
 
-    res.json({ mensaje: "Login exitoso" });
-  });
-},
-
-
-
+    res.json({ mensaje: 'Login exitoso' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensaje: 'Error del servidor' });
+  }
 };
